@@ -5,17 +5,19 @@ import Components.IComponents;
 import java.util.ArrayList;
 
 public abstract class Vehicle {
-    private int price;
+    private double price;
     private String colour;
     private ArrayList<IComponents> components;
+    private double rentalPrice;
 
-    public Vehicle(int price, String colour, ArrayList<IComponents> components) {
+    public Vehicle(double price, String colour, ArrayList<IComponents> components) {
         this.price = price;
         this.colour = colour;
         this.components = components;
+        rentalPrice = price * 0.1;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

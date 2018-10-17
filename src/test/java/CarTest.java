@@ -8,7 +8,8 @@ import vehicles.Car;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+
 
 public class CarTest {
 
@@ -22,7 +23,7 @@ public class CarTest {
         components.add(engine);
         components.add(tyres);
         components.add(fuelTank);
-        car = new Car(100, "blue", components);
+        car = new Car(100.0, "blue", components);
     }
 
 
@@ -33,7 +34,7 @@ public class CarTest {
 
     @Test
     public void hasPrice() {
-        assertEquals(100, car.getPrice());
+        assertEquals(100.0, car.getPrice());
     }
 
     @Test
