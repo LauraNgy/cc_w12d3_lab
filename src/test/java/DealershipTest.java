@@ -2,7 +2,9 @@ import Components.Engine;
 import Components.FuelTank;
 import Components.IComponents;
 import Components.Tyres;
+import dealership.Customer;
 import dealership.Dealership;
+import dealership.Till;
 import org.junit.Before;
 import org.junit.Test;
 import vehicles.Car;
@@ -18,6 +20,7 @@ public class DealershipTest {
     Car car;
     ElectricCar electricCar;
     Dealership dealership;
+    Till till;
     @Before
     public void before() {
         ArrayList<IComponents> components = new ArrayList<>();
@@ -34,7 +37,8 @@ public class DealershipTest {
         components.add(engine);
         components.add(tyres);
         electricCar = new ElectricCar(150, "green", components);
-        dealership = new Dealership();
+        till = new Till(500.0);
+        dealership = new Dealership(till);
     }
 
     @Test
@@ -48,5 +52,16 @@ public class DealershipTest {
         dealership.addVehicle(car);
         dealership.addVehicle(electricCar);
         assertEquals(2, dealership.getVehicleCount());
+    }
+
+    @Test
+    public void canSellCar() {
+        Customer customer = new Customer(500);
+        dealership.addVehicle(car);
+        dealership.sellVehicle(customer, car);
+        assertEquals(400.0, customer.getMoney(), 0);
+        assertEquals(600.0, till.getMoney(), 0);
+        assertEquals(0, dealership.getVehicleCount());
+        assertEquals(1, customer.getVehicleCount());
     }
 }
